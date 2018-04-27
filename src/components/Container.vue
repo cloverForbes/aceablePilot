@@ -5,6 +5,8 @@
             <h1>Robot Piloting Classes</h1>
         </div>
         <div id="form">
+            <input v-on:keyup="searchData()" v-model="searchBy" placeholder="search" type="text" >
+            <br/>
             <input v-on:change="sortData()" type="radio" id="title" value="title" v-model="sortBy">
             <label for="title">Title</label>
             <br>
@@ -33,7 +35,9 @@
         data: () => (
             {
                 products: [],
+                originalProducts: [],
                 sortBy: 'price',
+                searchBy: '',
                 asc: true,
             }
         ),
@@ -64,6 +68,18 @@
             reverse: function(){
                 this.asc = !this.asc;
                 this.products.reverse();
+            },
+
+            searchData: function(){
+                let tmpArray = [];
+                let search = this.searchBy.toLowerCase();
+                this.originalProducts.forEach(i => {
+                    if(i.title.toLowerCase().includes(search) || i.description.toLowerCase().includes(search))
+                    {
+                        tmpArray.push(i);
+                    }
+                });
+                this.products = tmpArray;
             }
         },
 
@@ -72,6 +88,7 @@
                 .then(response => response.json())
                 .then(data => {
                     this.products = data;
+                    this.originalProducts = data;
                     this.sortData();
                 })
         }
@@ -92,7 +109,7 @@
     #logo{
         height: 50px;
         max-width: 200px;
-        flex-grow: 2;
+        flex-grow: 1;
     }
 
     #container{
@@ -100,12 +117,13 @@
     }
 
     h1 {
-        flex-grow: 2;
+        flex-grow: 1;
         color: #00BEC4;
+        margin-left: -7.5%;
     }
 
     i {
         position: absolute;
-        top: 16%;
+        top: 18.5%;
     }
 </style>
