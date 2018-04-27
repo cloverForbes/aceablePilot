@@ -6,7 +6,7 @@
           v-bind:key="product.id"
           v-bind:title="product.title"
           v-bind:description="product.description"
-          v-bind:price="product.price"
+          v-bind:price="Number(product.price)"
         ></Product>
         <br/>
     </div>
@@ -19,7 +19,8 @@
         name: 'Container',
         data: () => (
             {
-                products: []
+                products: [],
+                sortBy: 'price',
             }
         ),
         components: {
@@ -27,6 +28,18 @@
         },
 
         methods: {
+            sortData: function(){
+                let sort = this.sortBy;
+                this.products.sort((a,b) => {
+                    if(a[sort] > b[sort]){
+                        return 1;
+                    }
+                    if(a[sort] < b[sort]){
+                        return -1;
+                    }
+                    return 0;
+                })
+            },
         },
 
         beforeMount(){
@@ -34,6 +47,7 @@
                 .then(response => response.json())
                 .then(data => {
                     this.products = data;
+                    this.sortData();
                 })
         }
     }
