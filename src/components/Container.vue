@@ -4,6 +4,14 @@
             <img id="logo" src="../assets/logo.png">
             <h1>Robot Piloting Classes</h1>
         </div>
+        <div id="form">
+            <input v-on:change="sortData()" type="radio" id="title" value="title" v-model="sortBy">
+            <label for="title">Title</label>
+            <br>
+            <input v-on:change="sortData()" type="radio" id="price" value=price v-model="sortBy">
+            <label for="price">Price</label>
+            <i v-on:click="reverse()">{{asc ? '▲' : '▼'}}</i>
+        </div>
         <div id="productContainer">
             <Product
                     v-for="product in products"
@@ -26,6 +34,7 @@
             {
                 products: [],
                 sortBy: 'price',
+                asc: true,
             }
         ),
         components: {
@@ -36,15 +45,26 @@
             sortData: function(){
                 let sort = this.sortBy;
                 this.products.sort((a,b) => {
-                    if(a[sort] > b[sort]){
+                    let aSort = a[sort];
+                    let bSort = b[sort];
+                    if(!(isNaN(aSort))){
+                        aSort = Number(aSort);
+                        bSort = Number(bSort);
+                    }
+                    if(aSort > bSort){
                         return 1;
                     }
-                    if(a[sort] < b[sort]){
+                    if(aSort < bSort){
                         return -1;
                     }
                     return 0;
                 })
             },
+
+            reverse: function(){
+                this.asc = !this.asc;
+                this.products.reverse();
+            }
         },
 
         beforeMount(){
@@ -82,5 +102,10 @@
     h1 {
         flex-grow: 2;
         color: #00BEC4;
+    }
+
+    i {
+        position: absolute;
+        top: 16%;
     }
 </style>
