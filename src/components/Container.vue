@@ -1,13 +1,15 @@
 <template>
     <div>
         <h1>Robot Piloting Classes</h1>
-        <Product
-          v-for="product in products"
-          v-bind:key="product.id"
-          v-bind:title="product.title"
-          v-bind:description="product.description"
-          v-bind:price="Number(product.price)"
-        ></Product>
+        <div id="productContainer">
+            <Product
+                    v-for="product in products"
+                    v-bind:key="product.id"
+                    v-bind:title="product.title"
+                    v-bind:description="product.description"
+                    v-bind:price="Number(product.price)"
+            ></Product>
+        </div>
         <br/>
     </div>
 </template>
@@ -52,3 +54,15 @@
         }
     }
 </script>
+
+<style>
+    #productContainer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    body{
+        text-align: center;
+    }
+</style>

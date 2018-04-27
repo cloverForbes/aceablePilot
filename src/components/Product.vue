@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="product">
         <p>{{title}}</p>
         <p>${{formatPrice(price)}}</p>
         <p>{{description}}</p>
@@ -26,3 +26,15 @@
         }
     }
 </script>
+
+
+<style>
+    #product {
+        flex-grow: 3;
+        width: 33%;
+        max-width: 33%;
+        height: auto;
+        border: 1px solid black;
+        margin: 1px;
+    }
+</style>
