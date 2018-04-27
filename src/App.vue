@@ -1,15 +1,17 @@
 <template>
   <div>
-    <img src="./assets/logo.png">
+    <Container />
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  components: {
+  import Container from './components/Container';
+  export default {
+    name: 'app',
+    components: {
+        Container
+    }
   }
-}
 </script>
 
 <style>
