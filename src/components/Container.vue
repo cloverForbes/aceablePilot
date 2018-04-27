@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h1>Robot Piloting Classes</h1>
+        <div id="container">
+            <img id="logo" src="../assets/logo.png">
+            <h1>Robot Piloting Classes</h1>
+        </div>
         <div id="productContainer">
             <Product
                     v-for="product in products"
@@ -64,5 +67,20 @@
     }
     body{
         text-align: center;
+    }
+
+    #logo{
+        height: 50px;
+        max-width: 200px;
+        flex-grow: 2;
+    }
+
+    #container{
+        display: flex;
+    }
+
+    h1 {
+        flex-grow: 2;
+        color: #00BEC4;
     }
 </style>
